@@ -1,0 +1,223 @@
+﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Oglasi</title>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.css" >
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+    @Html.Raw(JavaScriptSnippet.FullScript)
+</head>
+<body>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .lower-navbar {
+            margin-top: 10%;
+            background-color: #404040;
+            border: 1px solid black;
+            vertical-align: middle;
+            position: relative;
+        }
+
+        .lower-menu {
+            margin-left: 200px;
+            float: left;
+            height: 100%;
+        }
+
+        .lower-menu-right {
+            float: right;
+            vertical-align: middle;
+            margin-right: 150px;
+            margin-top: 5px;
+        }
+
+        .search {
+            vertical-align: middle;
+            height: 100%;
+        }
+
+        .search-element {
+            display: inline-block;
+            height: 40px;
+            vertical-align: middle;
+            
+        }
+
+        .footer-links {
+            color: white;
+            font-size: 12px;
+        }
+
+        .nav.navbar-nav li {
+        }
+
+        .footer {
+            padding-top: 20px;
+            font-size: 12px;
+            color: white;
+        }
+        .right-footer {
+            padding-top:60px;
+            font-size:12px;
+         
+        }
+    </style>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="vertical-align:middle">
+
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <div style="background-color:red; text-align:center; display:inline-block; position:absolute; width:100px; margin-left:200px; margin-top:12px; font-size:18px;">
+            <a asp-area="" asp-controller="Home" asp-action="Index"><span style="color:white">Klik Oglasi</span></a>
+        </div>
+
+        <div class="navbar-collapse collapse" style="margin-right:100px">
+
+            @await Html.PartialAsync("_LoginPartial")
+        </div>
+
+    </nav>
+    <div class="navbar lower-navbar">
+        <div class="lower-menu">
+            <ul class="nav navbar-nav" >
+                <li><a href="Index" style="border-right:1px solid black;"><i class="fa fa-home" style="color:white"> </i></a></li>
+                <li>@Html.ActionLink("Oglasi", "Index", new { controller = "Home" }, new { style = "color:white; border-right:1px solid black; height:50px" })</li>
+                <li>@Html.ActionLink("Klik Market", "Index", new { controller = "Home" }, new { style = "color:white; border-right:1px solid black" })</li>
+                <li>@Html.ActionLink("Mesta", "Index", new { controller = "Home" }, new { style = "color:white; border-right:1px solid black" })</li>
+                <li>@Html.ActionLink("Blog", "Index", new { controller = "Home" }, new { style = "color:white; border-right:1px solid black" })</li>
+                <li>@Html.ActionLink("Podrška", "Index", new { controller = "Home" }, new { style = "color:white; border-right:1px solid black" })</li>
+            </ul>
+
+        </div>
+        <div class="lower-menu-right">
+
+            <div class="search-element">
+                @Html.TextBox("Pretraga", null, "", new { placeholder = "Pretraga oglasa", style = "height:100%; width:300px; padding:0; margin:0; display:block" })
+
+            </div>
+            <div class="search-element">
+                @Html.ActionLink("Traži", "Index", new { controller = "Home" }, new { style = "background-color:blue; color:white; width:80px;display:block; padding:0; margin:0; line-height:40px; text-align:center" })
+            </div>
+
+
+        </div>
+    </div>
+    <div style="padding-bottom:0px; vertical-align:top">
+        @RenderBody()
+
+
+
+        <div class="navbar lower-navbar" style="background-color:#404040;  margin-bottom:0px; padding-top:0px; height:235px; vertical-align:top">
+            <div style="background-color:#585858; width:100%; height:20px;">
+                <div class="social-links" style="padding-top:40px; padding-right:50px; float:left; margin-left:200px">
+                    <a style="padding-right:20px;" href="https://www.facebook.com/klikoglasi"><i class="fa fa-rss" style="background-color:lightgray; height:20px; width:20px; text-align:center; font-size:20px; vertical-align:middle; color:dimgray; display:inline-block"></i></a>
+                    <a style="padding-right:20px;" href="https://www.facebook.com/klikoglasi"><i class="fa fa-facebook" style="background-color:lightgray; height:20px; width:20px; text-align:center; font-size:20px;  vertical-align:middle; color:dimgray; display:inline-block"></i></a>
+                    <a style="padding-right:20px;" href="https://www.facebook.com/klikoglasi"><i class="fa fa-google-plus" style="background-color:lightgray; height:20px; width:20px; text-align:center; font-size:20px;  vertical-align:middle; color:dimgray; display:inline-block"></i></a>
+                    <a style="padding-right:20px;" href="https://www.facebook.com/klikoglasi"><i class="fa fa-twitter" style="background-color:#404040; border:none; height:20px; width:20px; text-align:center; font-size:20px;  vertical-align:middle; color:lightgray; display:inline-block"></i></a>
+                </div>
+                <div style="display:inline-block">
+                    <div class="klik-oglasi" style="color:white; padding-top:30px; padding-right:100px; display:inline-block; vertical-align:top">
+                        <h5><b>Klik oglasi</b></h5>
+
+                        <div>
+                            @Html.ActionLink("Oglasi", "Index", new { controller = "Home" }, new { @class = "footer-links" })
+                        </div>
+                        <div>
+                            @Html.ActionLink("Blog", "Index", new { controller = "Home" }, new { @class = "footer-links" })
+                        </div>
+                        <div>
+                            @Html.ActionLink("RSS kanali", "Index", new { controller = "Home" }, new { @class = "footer-links" })
+                        </div>
+
+                    </div>
+
+                    <div class="klik-oglasi" style="color:white; padding-top:30px; display:inline-block; vertical-align:top">
+                        <h5><b>Klik market</b></h5>
+
+                        <div>
+                            @Html.ActionLink("Market", "Index", new { controller = "Home" }, new { @class = "footer-links" })
+                        </div>
+                        <div>
+                            @Html.ActionLink("Besplatna prodavnica", "Index", new { controller = "Home" }, new { @class = "footer-links" })
+                        </div>
+
+
+                    </div>
+                    <div class="footer">
+                        &copy; @DateTime.Now.Year www.oglasi.com. Sva prava pridržana
+                    </div>
+                </div>
+
+                <div style="display:inline-block; float:right; margin-right:160px">
+                    
+                    <div class="klik-oglasi" style="color:white; padding-left:40px; padding-top:30px; display:inline-block; vertical-align:top">
+                        <h5><b>Pomoć</b></h5>
+
+                        <div>
+                            @Html.ActionLink("Dokumentacija", "Index", new { controller = "Home" }, new { @class = "footer-links" })
+                        </div>
+                        <div>
+                            @Html.ActionLink("Vaši predlozi", "Index", new { controller = "Home" }, new { @class = "footer-links" })
+                        </div>
+                        <div>
+                            @Html.ActionLink("Kontakt", "Index", new { controller = "Home" }, new { @class = "footer-links" })
+                        </div>
+                    </div>
+                    <div class="right-footer">
+                        <span style="color:white">Netpoint D.O.O Apatin</span> @Html.ActionLink("Izrada sajta", "Index", "Home")
+                    </div>
+                </div>
+            
+
+
+            </div>
+
+        </div>
+    </div>
+
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

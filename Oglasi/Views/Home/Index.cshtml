@@ -1,0 +1,144 @@
+﻿@model IEnumerable<Kategorije>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    .content {
+        margin-left: 190px;
+    }
+
+    .meni {
+        width: 180px;
+        background-color: whitesmoke;
+        padding-left: 10px;
+        display: inline-block;
+    }
+
+    .kategorije {
+        padding-bottom: 10px;
+        font-size: 12px;
+    }
+
+    .kategorija-link {
+    }
+
+    .oglasi {
+        vertical-align: top;
+        width: 300px;
+        display: inline-block;
+        padding-right: 20px;
+        padding-left: 10px;
+    }
+
+    .kategorija-kraci-prikaz {
+        padding-bottom: 20px;
+    }
+
+    .kategorija-naslov {
+        border-bottom: 1px solid black;
+    }
+
+    .oglas-link {
+        font-size: 12px;
+    }
+
+    .oglas-cena-mesto {
+        font-size: 12px;
+    }
+
+    .oglas-podaci {
+        padding-top: 5px;
+    }
+
+    .meni-naslov {
+        padding-bottom: 15px;
+    }
+</style>
+
+<div class="content">
+    <div class="meni">
+        <div class="meni-naslov">
+            <span><b>KATEGORIJE OGLASA</b></span>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="kategorije">
+                <div class="kategorija-link">
+                    @Html.ActionLink(item.NazivKategorije, "Index", "Home")
+                </div>
+
+            </div>
+        }
+    </div>
+
+    <div class="oglasi">
+        @for (int i = 0; i < Model.Count()/2; i++)
+        {
+            var model = Model as Kategorije[];
+            var brOglasa = 0;
+            var brPotkategorija = model[i].Potkategorije.Count();
+            foreach (var item in model[i].Potkategorije)
+            {
+                brOglasa += item.OglasiPotkagorije.Count();
+
+            }
+
+            <div class="kategorija-kraci-prikaz">
+                <div class="kategorija-naslov">
+                    @Html.ActionLink(model[i].NazivKategorije, "Index", new { controller = "Home", style = "float:left" })
+                    <span style="float:right">@brOglasa</span>
+                </div>
+                <div class="oglas-podaci">
+                    @foreach (var item in model[i].Potkategorije)
+                    {
+                        @foreach (var oglas in item.OglasiPotkagorije.OrderByDescending(x=>x.Oglas.DatumObjave).Take(3))
+                        {
+                            <div class="oglas-link">
+                                @Html.ActionLink(oglas.Oglas.Naslov, "Index", "Home")
+                            </div>
+                            <div class="oglas-cena-mesto">
+                                <span>Cena: @oglas.Oglas.Cena dinara>@oglas.Oglas.Grad.ImeGrada</span>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
+
+    <div class="oglasi">
+        @for (int i = Model.Count() / 2; i < Model.Count(); i++)
+        {
+            var model = Model as Kategorije[];
+            var brOglasa = 0;
+                 foreach (var item in model[i].Potkategorije)
+                 {
+                     brOglasa += item.OglasiPotkagorije.Count();
+                 }
+            var brPotkategorija = model[i].Potkategorije.Count();
+            <div class="kategorija-kraci-prikaz">
+                <div class="kategorija-naslov">
+                    @Html.ActionLink(model[i].NazivKategorije, "Index", new { controller = "Home", style = "float:left" })
+                    <span style="float:right">@brOglasa</span>
+                </div>
+                <div class="oglas-podaci">
+                    @foreach (var item in model[i].Potkategorije)
+                    {
+                        @foreach (var oglas in item.OglasiPotkagorije.OrderByDescending(x=>x.Oglas.DatumObjave).Take(3))
+                        {
+                            <div class="oglas-link">
+                                @Html.ActionLink(oglas.Oglas.Naslov, "Index", "Home")
+                            </div>
+                            <div class="oglas-cena-mesto">
+                                <span>Cena: @oglas.Oglas.Cena dinara> @oglas.Oglas.Grad.ImeGrada</span>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
+</div>
