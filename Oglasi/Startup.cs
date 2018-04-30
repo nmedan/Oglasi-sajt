@@ -12,7 +12,9 @@ using Microsoft.Extensions.Logging;
 using Oglasi.Data;
 using Oglasi.Models;
 using Oglasi.Services;
-
+using Microsoft.AspNetCore.Authentication.Facebook;
+using System.Data;
+using Microsoft.AspNetCore.Authentication;
 namespace Oglasi
 {
     public class Startup
@@ -75,6 +77,21 @@ namespace Oglasi
             app.UseStaticFiles();
 
             app.UseIdentity();
+
+            app.UseFacebookAuthentication(new FacebookOptions()
+            {
+                AppId = Configuration["Facebook:AppId"],
+                AppSecret = Configuration["Facebook:AppSecret"]
+            }
+
+           );
+
+            app.UseGoogleAuthentication(new GoogleOptions()
+            {
+                ClientId = Configuration["Google:ClientId"],
+                ClientSecret = Configuration["Google:ClientSecret"]
+            }
+            );
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 

@@ -2,41 +2,208 @@
 @{
     ViewData["Title"] = "Register";
 }
+@inject SignInManager<ApplicationUser> SignInManager
 
-<h2>@ViewData["Title"].</h2>
+<style>
+    .content {
+        margin:0;
+        padding:0;
+        margin-left: 190px;
+        margin-right: 150px;
+        position: relative;
 
-<form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
-    <h4>Create a new account.</h4>
-    <hr />
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="form-group">
-        <label asp-for="Email" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
+    }
+
+    .meni {
+        width: 180px;
+        background-color: whitesmoke;
+        padding-left: 10px;
+        display: inline-block;
+        height: auto;
+        vertical-align: top;
+    }
+
+    .registration-login-form {
+        display: inline-block;
+        padding-left: 15px;
+        position:absolute;
+    }
+
+    .social-network-login {
+        display: inline-block;
+        background-color: lightgray;
+        margin-left:30px;
+        vertical-align: top;
+        margin-right: auto;
+        width: 400px;
+    }
+
+    .social-network-menu {
+        padding-top: 30px;
+        width: 100%;
+    }
+
+
+
+    .form-group {
+        width: 100%;
+    }
+
+    .form-control {
+        width:100%;
+    }
+
+    fieldset {
+        position: relative;
+        margin:0;
+        padding-left:30px;
+        padding-right:30px;
+        vertical-align: top;
+    }
+
+    form {
+    }
+
+    .form-place {
+    }
+
+    label {
+        font-weight: normal;
+    }
+
+    legend {
+        margin: -0.9em 0 0 0;
+        padding: 0;
+        font-size: 1.0em;
+        border-bottom: none;
+        border: 0px;
+        padding-right: 50px;
+        margin-right: 20px;
+        vertical-align: top;
+    }
+</style>
+
+<div class="content">
+    <div class="meni">
+        <div class="meni-naslov">
+            <span><b>KATEGORIJE OGLASA</b></span>
         </div>
+        @foreach (var item in @ViewBag.Kategorije as IEnumerable<Kategorije>)
+            {
+            <div class="kategorije">
+                <div class="kategorija-link">
+                    @Html.ActionLink(item.NazivKategorije, "Index", "Home")
+                </div>
+
+            </div>
+        }
     </div>
-    <div class="form-group">
-        <label asp-for="Password" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
+
+    <div class="registration-login-form">
+        <div style="vertical-align:top; padding-bottom:40px;">
+            <span style="font-size:22px;">
+                Registracija
+            </span>
+            <br />
+            <span style="font-size:16px;">
+                Za korišćenje Klik Oglasa potrebno je da kreirate korisnički nalog, odnosno da se registrujete kao član sajta Klik Oglasi. Ukoliko posedujete Facebook ili Gmail nalog, registracija nije neophodna. Klik Oglasima možete pristupiti korišćenjem jednog od ova dva naloga.
+            </span>
+
         </div>
-    </div>
-    <div class="form-group">
-        <label asp-for="ConfirmPassword" class="col-md-2 control-label"></label>
-        <div class="col-md-10">
-            <input asp-for="ConfirmPassword" class="form-control" />
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        <div style="display:inline-block; vertical-align:top; border:1px solid black; float:left;">
+
+            <fieldset>
+                <legend><span style="font-weight:bold; background-color:white; text-align:center;  vertical-align:top;">Registracija-kreiranje naloga</span></legend>
+                <form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                    <div style="padding-top:10px; padding-bottom:10px">
+                        <div class="form-group">
+                            <label asp-for="Username">Korisnik</label>
+
+                            <input asp-for="Username" class="form-control" />
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Email">Email</label>
+
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Password">Lozinka</label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+
+                            <label asp-for="ConfirmPassword">Potvrdi lozinku</label>
+
+                            <input asp-for="ConfirmPassword" class="form-control" />
+
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+
+                        </div>
+                        <div class="form-group">
+
+                            <input type="submit" value="Potvrdi unos" style="background-color:blue; width:100%; color:white; height:60px;" />
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
+
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default">Register</button>
+        <div class="social-network-login">
+            <div class="social-network-menu">
+                @{
+                    var loginProviders = SignInManager.GetExternalAuthenticationSchemes().ToList();
+                    if (loginProviders.Count > 0)
+                    {
+                        <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+
+
+                            @foreach (var provider in loginProviders)
+                            {
+                                <div style="padding-left:30px; padding-bottom:20px; vertical-align:middle; padding-right:30px">
+                                    <button class="form-control" type="submit" style=" height:60px;  vertical-align:middle; width:100%; background-color:blue; text-align:left; color:white;" name="provider">
+                                        @if (provider.AuthenticationScheme == "Facebook")
+                                        {
+                                            <i class="fa fa-facebook" style="font-size:20px; height:20px; width:20px; vertical-align:bottom; text-align:right; background-color:white; color:blue;"></i>
+
+                                        }
+                                        else
+                                        {
+                                            <i class="fa fa-google-plus" style="vertical-align:middle; font-size:20px; height:20px; width:20px; text-align:center; background-color:white; color:blue"></i>
+                                        }
+                                        <span style="vertical-align:middle;">Prijavi se preko @provider.AuthenticationScheme-a</span>
+                                    </button>
+                                </div>
+                            }
+                            <div style="padding-left:30px; padding-bottom:20px; vertical-align:middle; padding-right:30px">
+                                <i class="fa fa-question-circle" style=" vertical-align:middle; font-size:25px; color:blue;"></i>
+                                <span style="vertical-align:middle; font-size:16px;">Već ste registrovan član?</span>
+                            </div>
+                            <div style="padding-left:30px; padding-bottom:30px; vertical-align:middle; padding-right:30px">
+                                <button class="form-control" type="submit" style=" height:60px;  vertical-align:middle; width:100%; background-color:blue; text-align:left; color:white;" name="provider">
+                                    <i class="fa fa-sign-in" style="vertical-align:middle; font-size:20px; height:20px; width:20px; text-align:left;background-color:blue; color:white; border:none"></i>
+                                    <span style="vertical-align:middle;">Prijava za registrovane</span>
+                                </button>
+                            </div>
+
+
+
+                        </form>
+                    }
+                }
+            </div>
         </div>
+
     </div>
-</form>
+</div>
+
+
+
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}
+}*

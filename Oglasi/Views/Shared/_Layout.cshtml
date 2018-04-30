@@ -47,6 +47,7 @@
             vertical-align: middle;
             margin-right: 150px;
             margin-top: 5px;
+            padding:0;
         }
 
         .search {
@@ -102,7 +103,7 @@
     <div class="navbar lower-navbar">
         <div class="lower-menu">
             <ul class="nav navbar-nav" >
-                <li><a href="Index" style="border-right:1px solid black;"><i class="fa fa-home" style="color:white"> </i></a></li>
+                <li><a href="Index" style="border-right:1px solid black;"><i class="fa fa-home" style="color:white;"> </i></a></li>
                 <li>@Html.ActionLink("Oglasi", "Index", new { controller = "Home" }, new { style = "color:white; border-right:1px solid black; height:50px" })</li>
                 <li>@Html.ActionLink("Klik Market", "Index", new { controller = "Home" }, new { style = "color:white; border-right:1px solid black" })</li>
                 <li>@Html.ActionLink("Mesta", "Index", new { controller = "Home" }, new { style = "color:white; border-right:1px solid black" })</li>
@@ -114,12 +115,12 @@
         <div class="lower-menu-right">
 
             <div class="search-element">
-                @Html.TextBox("Pretraga", null, "", new { placeholder = "Pretraga oglasa", style = "height:100%; width:300px; padding:0; margin:0; display:block" })
-
+                @Html.TextBox("Pretraga", null, "", new { placeholder = "Pretraga oglasa", style = "height:100%; width:300px; padding:0; margin:0; display:inline-block" })
+                @Html.ActionLink("Traži", "Index", new { controller = "Home" }, new { style = "background-color:blue; color:white; width:80px;display:inline-block; padding:0; margin:0; line-height:40px; text-align:center" })
             </div>
-            <div class="search-element">
+            @*<div class="search-element">
                 @Html.ActionLink("Traži", "Index", new { controller = "Home" }, new { style = "background-color:blue; color:white; width:80px;display:block; padding:0; margin:0; line-height:40px; text-align:center" })
-            </div>
+            </div>*@
 
 
         </div>

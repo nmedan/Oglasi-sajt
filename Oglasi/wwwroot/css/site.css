@@ -48,3 +48,32 @@ textarea {
         display: none;
     }
 }
+
+.meni {
+    width: 180px;
+    background-color: whitesmoke;
+    padding-left: 10px;
+    display: inline-block;
+    height:auto;
+    vertical-align:top;
+}
+
+.meni-naslov {
+    padding-bottom: 15px;
+}
+
+.content {
+    margin-left: 190px;
+    margin-right: 190px;
+    position: relative;
+    margin-top: 0px;
+}
+
+
+
+.kategorije
+{
+    padding-bottom: 10px;
+    font-size: 12px;
+}
+

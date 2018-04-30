@@ -24,6 +24,7 @@ namespace Oglasi.Controllers
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
         private readonly string _externalCookieScheme;
+        private readonly IOglasiServis _oglasiServis;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -31,6 +32,7 @@ namespace Oglasi.Controllers
             IOptions<IdentityCookieOptions> identityCookieOptions,
             IEmailSender emailSender,
             ISmsSender smsSender,
+            IOglasiServis oglasiServis,
             ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
@@ -38,6 +40,7 @@ namespace Oglasi.Controllers
             _externalCookieScheme = identityCookieOptions.Value.ExternalCookieAuthenticationScheme;
             _emailSender = emailSender;
             _smsSender = smsSender;
+            _oglasiServis = oglasiServis;
             _logger = loggerFactory.CreateLogger<AccountController>();
         }
 
@@ -49,7 +52,7 @@ namespace Oglasi.Controllers
         {
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.Authentication.SignOutAsync(_externalCookieScheme);
-
+            ViewBag.Kategorije = await _oglasiServis.SveKategorije(); 
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
@@ -87,8 +90,7 @@ namespace Oglasi.Controllers
                     return View(model);
                 }
             }
-
-            // If we got this far, something failed, redisplay form
+            ViewBag.Kategorije = await _oglasiServis.SveKategorije();
             return View(model);
         }
 
@@ -96,9 +98,10 @@ namespace Oglasi.Controllers
         // GET: /Account/Register
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Register(string returnUrl = null)
+        public async Task<IActionResult> Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+            ViewBag.Kategorije = await _oglasiServis.SveKategorije();
             return View();
         }
 
@@ -112,7 +115,7 @@ namespace Oglasi.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -128,7 +131,8 @@ namespace Oglasi.Controllers
                 }
                 AddErrors(result);
             }
-
+            
+            ViewBag.Kategorije = await _oglasiServis.SveKategorije();
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -214,7 +218,7 @@ namespace Oglasi.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
                 var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

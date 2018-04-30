@@ -5,7 +5,7 @@ c:\users\nemanja\source\repos\Oglasi\Oglasi\bin\Debug\netcoreapp1.1\Oglasi.dll
 c:\users\nemanja\source\repos\Oglasi\Oglasi\bin\Debug\netcoreapp1.1\Oglasi.pdb
 c:\users\nemanja\source\repos\Oglasi\Oglasi\obj\Debug\netcoreapp1.1\Oglasi.csprojResolveAssemblyReference.cache
 c:\users\nemanja\source\repos\Oglasi\Oglasi\obj\Debug\netcoreapp1.1\Oglasi.csproj.CoreCompileInputs.cache
-c:\users\nemanja\source\repos\Oglasi\Oglasi\obj\Debug\netcoreapp1.1\UserSecretsAssemblyInfo.cs
 c:\users\nemanja\source\repos\Oglasi\Oglasi\obj\Debug\netcoreapp1.1\Oglasi.AssemblyInfo.cs
 c:\users\nemanja\source\repos\Oglasi\Oglasi\obj\Debug\netcoreapp1.1\Oglasi.dll
 c:\users\nemanja\source\repos\Oglasi\Oglasi\obj\Debug\netcoreapp1.1\Oglasi.pdb
+C:\Users\Nemanja\source\repos\Oglasi\Oglasi\obj\Debug\netcoreapp1.1\UserSecretsAssemblyInfo.cs
