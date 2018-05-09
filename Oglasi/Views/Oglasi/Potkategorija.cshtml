@@ -1,0 +1,132 @@
+@model IEnumerable<Oglasi>
+
+
+<style>
+
+    .visited:visited {
+        color: lightblue;
+    }
+
+
+    a:hover {
+        color: lightblue;
+        text-decoration:none;
+    }
+
+    .content {
+        margin: 0;
+        padding: 0;
+        margin-left: 190px;
+        margin-right: 150px;
+        position: relative;
+    }
+
+    .meni {
+        width: 180px;
+        background-color: whitesmoke;
+        padding-left: 10px;
+        display: inline-block;
+        height: auto;
+        vertical-align: top;
+    }
+
+    .oglasi {
+        display: inline-block;
+        padding-left: 15px;
+    }
+
+    .oglas {
+        border-bottom: 1px solid lightgray;
+    }
+</style>
+
+
+<div class="content">
+    <div class="meni">
+        <div class="meni-naslov">
+            <span><b>KATEGORIJE OGLASA</b></span>
+        </div>
+        @foreach (var item in @ViewBag.Kategorije as IEnumerable<Kategorije>)
+
+            {
+
+            <div class="kategorije">
+                <div class="kategorija-link">
+                    @Html.ActionLink(item.NazivKategorije, "Kategorija", new { id = item.Id })
+
+                </div>
+
+            </div>
+            @if (item.Id == (int)@ViewBag.KategorijaId)
+                {
+                @foreach (var p in @ViewBag.Potkategorije as IEnumerable<Potkategorije>)
+                    {
+                    <div class="kategorije">
+                        <div class="kategorija-link">
+
+                            @if (p.Id == (int)@ViewBag.PotkategorijaId)
+                            {
+                                <a href="@Url.Action("Potkategorija", new { id = p.Id,  })"  class="visited">
+                                    <span>&#9658  @p.NazivPotkategorije</span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Potkategorija", new { id = p.Id,  })">
+                                    <span>&#9658  @p.NazivPotkategorije</span>
+                                </a>
+
+                            }
+
+                        </div>
+
+                    </div>
+                }
+            }
+        }
+    </div>
+    
+    <div class="oglasi">
+        <div style="font-size:14px;">
+            <b>@ViewBag.PotkategorijaIme</b>
+        </div>
+        @foreach (var item in Model)
+        {
+            <div class="oglas">
+                <div style="display:inline-block; width:150px; text-align:center; height:100px; vertical-align:middle;">
+                    <div style="vertical-align:middle;">
+                        <i class="fa fa-camera" style="vertical-align:middle; padding-top:30px; color:lightgray;"></i>
+                    </div>
+                    <div style="color:lightgray; vertical-align:middle;">
+                        Oglas bez slike
+                    </div>
+                </div>
+                <div style="display:inline-block; width:400px; vertical-align:middle; padding:0; margin:0">
+                    <div style="padding-top:10px; padding-bottom:10px; font-weight:bold; vertical-align:middle;">
+                        @Html.ActionLink(item.Naslov, "Index", "Home")
+                    </div>
+                    <div id="tekst-oglasa" style="width:400px; height:60px; padding-bottom:5px; vertical-align:middle; overflow:hidden; text-overflow:ellipsis; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3;">
+
+                        @item.TekstOglasa
+
+                    </div>
+
+                    <div style="vertical-align:middle; padding-bottom:5px;">
+                        <span>@item.DatumObjave</span><span>@item.Grad.ImeGrada</span>
+                    </div>
+                </div>
+                <div style="display:inline-block; vertical-align:top; text-align:center; width:60px; height:60px;">
+                    <div style="vertical-align:middle;">
+                        <span>
+                            Viðen:
+                        </span>
+                    </div>
+                    <div style="vertical-align:middle;">
+                        <i class="fa fa-camera" style="vertical-align:middle;"></i>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>

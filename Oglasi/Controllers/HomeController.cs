@@ -35,6 +35,7 @@ namespace Oglasi.Controllers
                         if (potkategorija.Id == oglaspotkategorija.PotkategorijeId)
                         {
                             potkategorija.OglasiPotkagorije.Add(oglaspotkategorija);
+                            
                         }
                     }
                 }

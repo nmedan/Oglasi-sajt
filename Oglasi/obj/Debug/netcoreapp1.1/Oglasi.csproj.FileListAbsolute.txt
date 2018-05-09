@@ -8,4 +8,14 @@ c:\users\nemanja\source\repos\Oglasi\Oglasi\obj\Debug\netcoreapp1.1\Oglasi.cspro
 c:\users\nemanja\source\repos\Oglasi\Oglasi\obj\Debug\netcoreapp1.1\Oglasi.AssemblyInfo.cs
 c:\users\nemanja\source\repos\Oglasi\Oglasi\obj\Debug\netcoreapp1.1\Oglasi.dll
 c:\users\nemanja\source\repos\Oglasi\Oglasi\obj\Debug\netcoreapp1.1\Oglasi.pdb
+C:\Users\Nemanja\source\repos\Oglasi\Oglasi\bin\netcoreapp1.1\netcoreapp1.1\Oglasi.deps.json
+C:\Users\Nemanja\source\repos\Oglasi\Oglasi\bin\netcoreapp1.1\netcoreapp1.1\Oglasi.runtimeconfig.json
+C:\Users\Nemanja\source\repos\Oglasi\Oglasi\bin\netcoreapp1.1\netcoreapp1.1\Oglasi.runtimeconfig.dev.json
+C:\Users\Nemanja\source\repos\Oglasi\Oglasi\bin\netcoreapp1.1\netcoreapp1.1\Oglasi.dll
+C:\Users\Nemanja\source\repos\Oglasi\Oglasi\bin\netcoreapp1.1\netcoreapp1.1\Oglasi.pdb
 C:\Users\Nemanja\source\repos\Oglasi\Oglasi\obj\Debug\netcoreapp1.1\UserSecretsAssemblyInfo.cs
+C:\Users\Nemanja\source\repos\Oglasi\Oglasi\bin\Debug\netcoreapp1.1\netcoreapp1.1\Oglasi.deps.json
+C:\Users\Nemanja\source\repos\Oglasi\Oglasi\bin\Debug\netcoreapp1.1\netcoreapp1.1\Oglasi.runtimeconfig.json
+C:\Users\Nemanja\source\repos\Oglasi\Oglasi\bin\Debug\netcoreapp1.1\netcoreapp1.1\Oglasi.runtimeconfig.dev.json
+C:\Users\Nemanja\source\repos\Oglasi\Oglasi\bin\Debug\netcoreapp1.1\netcoreapp1.1\Oglasi.dll
+C:\Users\Nemanja\source\repos\Oglasi\Oglasi\bin\Debug\netcoreapp1.1\netcoreapp1.1\Oglasi.pdb

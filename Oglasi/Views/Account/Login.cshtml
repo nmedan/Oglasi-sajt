@@ -1,174 +1,180 @@
-﻿@*@using System.Collections.Generic
-@using Microsoft.AspNetCore.Http
-@using Microsoft.AspNetCore.Http.Authentication
-@model LoginViewModel
-@inject SignInManager<ApplicationUser> SignInManager
+﻿@using System.Collections.Generic
+    @using Microsoft.AspNetCore.Http
+    @using Microsoft.AspNetCore.Http.Authentication
+    @model LoginViewModel
+    @inject SignInManager<ApplicationUser> SignInManager
 
 
-<style>
-    .content {
-        margin-left: 190px;
-        margin-right: 190px;
-        position: relative;
-        margin-top: 0px;
-    }
-
-    .meni {
-        width: 180px;
-        background-color: whitesmoke;
-        padding-left: 10px;
-        display: inline-block;
-        height: auto;
-        vertical-align: top;
-    }
-
-    .registration-login-form {
-        display: inline-block;
-        padding-left: 10px;
-        float: right;
-        position: absolute;
-    }
-
-    .social-network-login {
-        display: inline-block;
-        background-color: lightgray;
-        vertical-align: top;
-        float:right;
-    }
-
-    .social-network-menu {
-        padding-top: 30px;
-        width: 100%;
-    }
-
-
-
-    .form-group {
-        width: 100%;
-    }
-
-    .form-control {
-        width: 100%;
-    }
-
-    fieldset {
-        position: relative;
-        padding-left: 30px;
-        padding-right: 30px;
-        vertical-align: top;
-    }
-
-    form {
-    }
-
-    .form-place {
-    }
-
-    label {
-        font-weight: normal;
-    }
-
-    legend {
-        margin: -0.9em 0 0 0;
-        padding: 0;
-        font-size: 1.0em;
-        border-bottom: none;
-        border: 0px;
-        padding-right: 50px;
-        margin-right: 20px;
-        vertical-align: top;
-    }
-</style>
-
-<div class="content">
-    <div class="meni">
-        <div class="meni-naslov">
-            <span><b>KATEGORIJE OGLASA</b></span>
-        </div>
-        @foreach (var item in @ViewBag.Kategorije as IEnumerable<Kategorije>)
-            {
-            <div class="kategorije">
-                <div class="kategorija-link">
-                    @Html.ActionLink(item.NazivKategorije, "Index", "Home")
-                </div>
-
-            </div>
+    <style>
+        .kategorija-link {
+            text-decoration:none;
         }
-    </div>
+        .kategorija-link:visited {
+            color:lightblue;
+        }
+        .content {
+            margin-left: 190px;
+            margin-right: 190px;
+            position: relative;
+            margin-top: 0px;
+        }
 
-    <div class="registration-login-form">
-        <div style="vertical-align:top; padding-bottom:30px;">
-            <span style="font-size:22px;">
-                Prijava
-            </span>
+        .meni {
+            width: 180px;
+            background-color: whitesmoke;
+            padding-left: 10px;
+            display: inline-block;
+            height: auto;
+            vertical-align: top;
+        }
 
-        </div>
-        <div style="display:inline-block; vertical-align:top; border:1px solid black;">
+        .registration-login-form {
+            display: inline-block;
+            padding-left: 10px;
+            float: right;
+            position: absolute;
+        }
 
-            <fieldset>
-                <legend><span style="font-weight:bold; background-color:white; text-align:center;  vertical-align:top;">Prijavi se</span></legend>
-                <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-                    <div style="padding-top:10px; padding-bottom:10px">
-                        <div class="form-group">
-                    
-                                <input asp-for="Email" placeholder="Email ili korisničko ime" class="form-control" />
-                                <span asp-validation-for="Email" class="text-danger"></span>
-                         
-                        </div>
-                        <div class="form-group">
-                                <input asp-for="Password" placeholder="Lozinka" class="form-control" />
-                                <span asp-validation-for="Password" class="text-danger"></span>
-                    
-                        </div>
+        .social-network-login {
+            display: inline-block;
+            background-color: lightgray;
+            vertical-align: top;
+            float:right;
+        }
+
+        .social-network-menu {
+            padding-top: 30px;
+            width: 100%;
+        }
+
+
+
+        .form-group {
+            width: 100%;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+
+        fieldset {
+            position: relative;
+            padding-left: 30px;
+            padding-right: 30px;
+            vertical-align: top;
+        }
+
+        form {
+        }
+
+        .form-place {
+        }
+
+        label {
+            font-weight: normal;
+        }
+
+        legend {
+            margin: -0.9em 0 0 0;
+            padding: 0;
+            font-size: 1.0em;
+            border-bottom: none;
+            border: 0px;
+            padding-right: 50px;
+            margin-right: 20px;
+            vertical-align: top;
+        }
+    </style>
+
+    <div class="content">
+        <div class="meni">
+            <div class="meni-naslov">
+                <span><b>KATEGORIJE OGLASA</b></span>
+            </div>
+            @foreach (var item in @ViewBag.Kategorije as IEnumerable<Kategorije>)
+                {
+                <div class="kategorije">
+                    <div class="kategorija-link">
+                        @Html.ActionLink(item.NazivKategorije, "Index", "Home")
                     </div>
-                </form>
-            </fieldset>
 
+                </div>
+            }
         </div>
-        <div class="social-network-login">
-            <div class="social-network-menu">
-                @{
-                    var loginProviders = SignInManager.GetExternalAuthenticationSchemes().ToList();
-                    if (loginProviders.Count > 0)
-                    {
-                        <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+
+        <div class="registration-login-form">
+            <div style="vertical-align:top; padding-bottom:30px;">
+                <span style="font-size:22px;">
+                    Prijava
+                </span>
+
+            </div>
+            <div style="display:inline-block; vertical-align:top; border:1px solid black;">
+
+                <fieldset>
+                    <legend><span style="font-weight:bold; background-color:white; text-align:center;  vertical-align:top;">Prijavi se</span></legend>
+                    <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                        <div style="padding-top:10px; padding-bottom:10px">
+                            <div class="form-group">
+
+                                    <input asp-for="Email" placeholder="Email ili korisničko ime" class="form-control" />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+
+                            </div>
+                            <div class="form-group">
+                                    <input asp-for="Password" placeholder="Lozinka" class="form-control" />
+                                    <span asp-validation-for="Password" class="text-danger"></span>
+
+                            </div>
+                        </div>
+                    </form>
+                </fieldset>
+
+            </div>
+            <div class="social-network-login">
+                <div class="social-network-menu">
+                    @{
+                        var loginProviders = SignInManager.GetExternalAuthenticationSchemes().ToList();
+                        if (loginProviders.Count > 0)
+                        {
+                            <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
 
 
-                            @foreach (var provider in loginProviders)
-                            {
-                                <div style="padding-left:30px; padding-bottom:20px; vertical-align:middle; padding-right:30px">
-                                    <button class="form-control" type="submit" style=" height:60px;  vertical-align:middle; width:100%; background-color:blue; text-align:left; color:white;" name="provider">
-                                        @if (provider.AuthenticationScheme == "Facebook")
-                                        {
-                                            <i class="fa fa-facebook" style="font-size:20px; vertical-align:middle; text-align:center; background-color:white; padding-right: 10px; color:blue;"></i>
+                                @foreach (var provider in loginProviders)
+                                {
+                                    <div style="padding-left:30px; padding-bottom:20px; vertical-align:middle; padding-right:30px">
+                                        <button class="form-control" type="submit" style=" height:60px;  vertical-align:middle; width:100%; background-color:blue; text-align:left; color:white;" name="provider">
+                                            @if (provider.AuthenticationScheme == "Facebook")
+                                            {
+                                                <i class="fa fa-facebook" style="font-size:20px; vertical-align:middle; text-align:center; background-color:white; padding-right: 10px; color:blue;"></i>
 
-                                        }
-                                        else
-                                        {
-                                            <i class="fa fa-google-plus" style="vertical-align:middle; font-size:20px; height:20px; width:20px; text-align:left;background-color:white; color:black"></i>
-                                        }
-                                        <span style="vertical-align:middle;">Prijavi se preko @provider.AuthenticationScheme-a</span>
-                                    </button>
-                                </div>
-                            }
-                          
-
+                                            }
+                                            else
+                                            {
+                                                <i class="fa fa-google-plus" style="vertical-align:middle; font-size:20px; height:20px; width:20px; text-align:left;background-color:white; color:black"></i>
+                                            }
+                                            <span style="vertical-align:middle;">Prijavi se preko @provider.AuthenticationScheme-a</span>
+                                        </button>
+                                    </div>
+                                }
 
 
-                        </form>
+
+
+                            </form>
+                        }
                     }
-                }
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 
 
-@section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}**@
+    @section Scripts {
+        @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    }**@
 
 @model RegisterViewModel
 @{
@@ -177,6 +183,15 @@
 @inject SignInManager<ApplicationUser> SignInManager
 
 <style>
+    a {
+        text-decoration:none;
+    }
+
+    a:hover {
+        color: lightblue;
+        text-decoration:none;
+    }
+
     .content {
         margin:0;
         padding:0;
@@ -261,7 +276,7 @@
             {
             <div class="kategorije">
                 <div class="kategorija-link">
-                    @Html.ActionLink(item.NazivKategorije, "Index", "Home")
+                    @Html.ActionLink(item.NazivKategorije, "Index", "Home", new { @class = "visited" })
                 </div>
 
             </div>

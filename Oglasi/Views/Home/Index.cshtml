@@ -4,14 +4,15 @@
     ViewData["Title"] = "Home Page";
 }
 <style>
-    
 
-    
-
-    
-
-    .kategorija-link {
+    a {
+        text-decoration: none;
     }
+
+        a:hover {
+            color: lightblue;
+            text-decoration:none;
+        }
 
     .oglasi {
         vertical-align: top;
@@ -53,7 +54,7 @@
         {
             <div class="kategorije">
                 <div class="kategorija-link">
-                    @Html.ActionLink(item.NazivKategorije, "Index", "Home")
+                    @Html.ActionLink(item.NazivKategorije, "Kategorija", "Oglasi", new {id = item.Id }, new { @class = "visited" })
                 </div>
 
             </div>

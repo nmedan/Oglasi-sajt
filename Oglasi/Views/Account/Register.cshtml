@@ -5,6 +5,16 @@
 @inject SignInManager<ApplicationUser> SignInManager
 
 <style>
+
+    a {
+        text-decoration: none;
+    }
+
+        a:hover {
+            color: lightblue;
+            text-decoration:none;
+        }
+
     .content {
         margin:0;
         padding:0;
@@ -92,7 +102,7 @@
             {
             <div class="kategorije">
                 <div class="kategorija-link">
-                    @Html.ActionLink(item.NazivKategorije, "Index", "Home")
+                    @Html.ActionLink(item.NazivKategorije, "Index", "Home", new { @class = "visited" })
                 </div>
 
             </div>
