@@ -41,6 +41,12 @@ namespace Oglasi.Services
             return oglasi;
         }
 
+        public async Task<IEnumerable<Models.Gradovi>> SviGradovi()
+        {
+            var gradovi = await _context.Gradovi.ToArrayAsync();
+            return gradovi;
+        }
+
         public async Task<IEnumerable<Models.Oglasi>> SviOglasiOdKategorije(int id)
         {
             List<Models.Oglasi> Ogl = new List<Models.Oglasi>();
@@ -72,6 +78,12 @@ namespace Oglasi.Services
             return Ogl.ToAsyncEnumerable().ToEnumerable();
         }
 
+        public async Task<IEnumerable<Models.Oglasi>> SviOglasiIzGrada(int id)
+        {
+            var oglasi = await _context.Oglasi.Include(x => x.Grad).Where(x=>x.Grad.Id == id).ToArrayAsync();
+            return oglasi;
+        }
+
         public async Task<IEnumerable<Potkategorije>> SvePotkategorijeOdKategorije(int id)
         {
             var potkategorije = await  _context.Potkategorije.Include(x => x.Kategorija).Where(x => x.Kategorija.Id == id).
@@ -89,6 +101,12 @@ namespace Oglasi.Services
         {
             var potkategorija = _context.Potkategorije.Find(id);
             return potkategorija;
+        }
+
+        public Gradovi IzaberiGrad(int id)
+        {
+            var grad = _context.Gradovi.Find(id);
+            return grad;
         }
 
         public Oglasi.Models.Oglasi IzaberiOglas(int id)

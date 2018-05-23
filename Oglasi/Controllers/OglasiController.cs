@@ -48,5 +48,15 @@ namespace Oglasi.Controllers
             return View(oglasi);
         }
 
+        public async Task<IActionResult> Grad(int id)
+        {
+            var oglasi = await _oglasiServis.SviOglasiIzGrada(id);
+            var grad = _oglasiServis.IzaberiGrad(id);
+            ViewBag.Kategorije = await _oglasiServis.SveKategorije();
+            ViewBag.ImeGrada = grad.ImeGrada;
+            return View(oglasi);
+        }
+
+
     }
 }
