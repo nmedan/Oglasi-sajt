@@ -41,6 +41,13 @@ namespace Oglasi.Services
             return oglasi;
         }
 
+        public async Task<IEnumerable<Models.Oglasi>> TraziOglase(string s)
+        {
+            var oglasi = await _context.Oglasi.Include(x => x.Grad).Include(x => x.Autor).Where(x => x.Naslov.Contains(s) || x.TekstOglasa.Contains(s) ||
+              x.Cena.ToString().Contains(s)).ToArrayAsync();
+            return oglasi;
+        }
+
         public async Task<IEnumerable<Models.Gradovi>> SviGradovi()
         {
             var gradovi = await _context.Gradovi.ToArrayAsync();

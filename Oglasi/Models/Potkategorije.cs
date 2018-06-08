@@ -11,8 +11,7 @@ namespace Oglasi.Models
         public int Id { get; set; }
 
         public string NazivPotkategorije { get; set; }
-
-        
+       
         public int KategorijeId { get; set; }
 
         [ForeignKey("KategorijeId")]

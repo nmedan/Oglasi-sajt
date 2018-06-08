@@ -19,10 +19,10 @@ namespace Oglasi.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var gradovi = await _oglasiServis.SviGradovi();
+            ViewBag.Gradovi = await _oglasiServis.SviGradovi();
             var oglasi = await _oglasiServis.SviOglasi();
             var kategorije = await _oglasiServis.SveKategorije();
-            foreach (var grad in gradovi)
+            foreach (var grad in ViewBag.Gradovi)
             {
                 foreach (var oglas in oglasi)
                 {
@@ -33,7 +33,7 @@ namespace Oglasi.Controllers
                 }
             }
             ViewBag.Kategorije = kategorije;
-            return View(gradovi);
+            return View();
         }
     }
 }

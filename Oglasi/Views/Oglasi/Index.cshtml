@@ -1,4 +1,4 @@
-@model IEnumerable<Oglasi>
+
 @inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
 @{
     ViewData["Title"] = "Index";
@@ -61,7 +61,7 @@
         }
     </div>
     <div class="oglasi">
-        @foreach (var item in Model)
+        @foreach (var item in ViewBag.Oglasi as IEnumerable<Oglasi>)
         {
         <div class="oglas">
             <div style="display:inline-block; width:150px; text-align:center; height:100px; vertical-align:middle;">

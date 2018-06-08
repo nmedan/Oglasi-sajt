@@ -13,6 +13,7 @@ namespace Oglasi.Services
         Task<IEnumerable<Potkategorije>> SvePotkategorije();
         Task<IEnumerable<OglasiPotkategorije>> SviOglasiPotkategorije();
         Task<IEnumerable<Models.Oglasi>> SviOglasi();
+        Task<IEnumerable<Models.Oglasi>> TraziOglase(string s);
         Task<IEnumerable<Models.Gradovi>> SviGradovi();
         Task<IEnumerable<Models.Oglasi>> SviOglasiOdKategorije(int id);
         Task<IEnumerable<Models.Oglasi>> SviOglasiOdPotkategorije(int id);

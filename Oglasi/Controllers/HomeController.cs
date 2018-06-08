@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Oglasi.Services;
-
+using Oglasi.Models;
 namespace Oglasi.Controllers
 {
     public class HomeController : Controller
@@ -16,7 +16,7 @@ namespace Oglasi.Controllers
             _oglasiServis = oglasiServis;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(Pretraga pretraga)
         {
             var kategorije = await _oglasiServis.SveKategorije();
             var potkategorije = await _oglasiServis.SvePotkategorije();
@@ -41,7 +41,8 @@ namespace Oglasi.Controllers
                 }
 
             }
-            return View(kategorije);
+            ViewBag.Kategorije = kategorije;
+            return View(pretraga);
         }
 
         public IActionResult About()

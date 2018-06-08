@@ -23,7 +23,6 @@ namespace Oglasi.Controllers
             return View();
         }
 
-        [Route("Kategorija/Oglasi/id")]
         public async Task<IActionResult> Oglasi(int id)
         {
             

@@ -1,16 +1,25 @@
+@model Pretraga
 
+<script>
+    $(document).ready(function () {
+        Search();
+    });
+
+    function Search() {
+        var search = $('#search');
+        search.css("display", "none");
+    }
+</script>
 
 <style>
-
-    .visited:visited {
-        color: lightblue;
+    a {
+        text-decoration: none;
     }
 
-
-    a:hover {
-        color: lightblue;
-        text-decoration:none;
-    }
+        a:hover {
+            color: lightblue;
+            text-decoration: none;
+        }
 
     .content {
         margin: 0;
@@ -40,58 +49,61 @@
 </style>
 
 
+
 <div class="content">
     <div class="meni">
         <div class="meni-naslov">
             <span><b>KATEGORIJE OGLASA</b></span>
         </div>
         @foreach (var item in @ViewBag.Kategorije as IEnumerable<Kategorije>)
-
             {
-
             <div class="kategorije">
                 <div class="kategorija-link">
-                    @Html.ActionLink(item.NazivKategorije, "Kategorija", new { id = item.Id })
+
+                    @Html.ActionLink(item.NazivKategorije, "Kategorija", new{id=item.Id}, new { @class = "visited" })
 
                 </div>
 
             </div>
-            @if (item.Id == (int)@ViewBag.KategorijaId)
-                {
-                @foreach (var p in @ViewBag.Potkategorije as IEnumerable<Potkategorije>)
-                    {
-                    <div class="kategorije">
-                        <div class="kategorija-link">
-
-                            @if (p.Id == (int)@ViewBag.PotkategorijaId)
-                            {
-                                <a href="@Url.Action("Potkategorija", new { id = p.Id,  })"  class="visited">
-                                    <span>&#9658  @p.NazivPotkategorije</span>
-                                </a>
-                            }
-                            else
-                            {
-                                <a href="@Url.Action("Potkategorija", new { id = p.Id,  })">
-                                    <span>&#9658  @p.NazivPotkategorije</span>
-                                </a>
-
-                            }
-
-                        </div>
-
-                    </div>
-                }
-            }
         }
     </div>
-    
-    <div class="oglasi">
-        <div style="font-size:14px;">
-            <b>@ViewBag.PotkategorijaIme</b>
+    <div class="oglasi" >
+        
+            @using (Html.BeginForm("Pretraga", "Oglasi", FormMethod.Get))
+            {
+                <div style="padding-bottom:30px;">
+                    <ul style="list-style-type:none; margin:0; padding:0; width:650px;">
+                        <li style="display:inline-block;  margin:0; padding:0; width:30%; float:left">
+                            <label style=" border:thin; margin:0; padding:0; background-color:lightgray; width:100%; border:none; font-weight:normal; text-align:center; line-height:40px;">Pretraga</label>
+                        </li>
+                        <li style="display:inline-block; margin:0; padding:0;   width:40%; float:left;">
+                            @Html.TextBoxFor(model => model.Tekst, null, new { placeholder = "Pretraga oglasa", style = "line-height:40px;  margin:0: padding:0;  width:100%;  padding-left:10px; display:inline-block" })
+                        </li>
+                        <li style="display:inline-block; margin:0; padding:0;  width:30%; float:left;">
+                            <input type="submit" value="Traži" style="background-color:blue; border:double; color:white; width:100%;  border:none; margin:0; padding:0; display:inline-block; line-height:40px; text-align:center" />
+                        </li>
+                    </ul>
+                    <div style="background-color:lightgray; padding-left:50px; height:35px; width:100%; padding-top:0; float:left;">
+                        <span style="float:left; padding-left:70px; padding-right:20px;">Samo:</span>
+                        <span style="display:inline-block;"><input type="checkbox" /></span>
+                        <span>Oglasi</span>
+                        <span style="display:inline-block;"><input type="checkbox" /></span>
+                        <span>Marketi</span>
+                    </div>
+                </div>
+               
+            }
+       
+        
+       @if ((ViewBag.Oglasi as IEnumerable<Oglasi>).Count() > 0)
+       {
+        <div style="font-size:14px; vertical-align:middle; margin-top:20px; display:inline-block;">
+            <b>Rezultat pretrage</b>
         </div>
-        @foreach (var item in ViewBag.Oglasi as IEnumerable<Oglasi>)
+       }
+        @foreach (var item in @ViewBag.Oglasi as IEnumerable<Oglasi>)
         {
-            <div class="oglas">
+            <div class="oglas" >
                 <div style="display:inline-block; width:150px; text-align:center; height:100px; vertical-align:middle;">
                     <div style="vertical-align:middle;">
                         <i class="fa fa-camera" style="vertical-align:middle; padding-top:30px; color:lightgray;"></i>
@@ -129,3 +141,4 @@
 
     </div>
 </div>
+

@@ -20,43 +20,51 @@ namespace Oglasi.Controllers
         public async Task<IActionResult> Index()
         {
             
-            var oglasi = await _oglasiServis.SviOglasi();
+            ViewBag.Oglasi = await _oglasiServis.SviOglasi();
             ViewBag.Kategorije = await _oglasiServis.SveKategorije();
-            return View(oglasi);
+            return View();
         }
 
         public async Task<IActionResult> Kategorija(int id)
-        {
-            var oglasi = await _oglasiServis.SviOglasiOdKategorije(id);
+        {         
             var kategorija =  _oglasiServis.IzaberiKategoriju(id);
             ViewBag.Kategorije = await _oglasiServis.SveKategorije();
             ViewBag.KategorijaId = id;
             ViewBag.KategorijaIme = kategorija.NazivKategorije;
+            ViewBag.Oglasi = await _oglasiServis.SviOglasiOdKategorije(id);
             ViewBag.Potkategorije = await _oglasiServis.SvePotkategorijeOdKategorije(id);
-            return View(oglasi);
+            return View();
         }
 
         public async Task<IActionResult> Potkategorija(int id)
         {
-            var oglasi = await _oglasiServis.SviOglasiOdPotkategorije(id);           
+                       
             var potkategorija = _oglasiServis.IzaberiPotkategoriju(id);          
             ViewBag.Kategorije = await _oglasiServis.SveKategorije();
             ViewBag.PotkategorijaId = id;
             ViewBag.KategorijaId = potkategorija.Kategorija.Id;
             ViewBag.PotkategorijaIme = potkategorija.NazivPotkategorije;
+            ViewBag.Oglasi = await _oglasiServis.SviOglasiOdPotkategorije(id);
             ViewBag.Potkategorije = await _oglasiServis.SvePotkategorijeOdKategorije(potkategorija.Kategorija.Id);
-            return View(oglasi);
+            return View();
         }
 
         public async Task<IActionResult> Grad(int id)
         {
-            var oglasi = await _oglasiServis.SviOglasiIzGrada(id);
+           
             var grad = _oglasiServis.IzaberiGrad(id);
             ViewBag.Kategorije = await _oglasiServis.SveKategorije();
+            ViewBag.Oglasi = await _oglasiServis.SviOglasiIzGrada(id);
             ViewBag.ImeGrada = grad.ImeGrada;
-            return View(oglasi);
+            return View();
         }
 
-
+        
+        public async Task <IActionResult> Pretraga(Pretraga pretraga)
+        {
+            ViewBag.Oglasi = await _oglasiServis.TraziOglase(pretraga.Tekst);
+            ViewBag.Kategorije = await _oglasiServis.SveKategorije();
+            return View();
+        }
     }
 }
