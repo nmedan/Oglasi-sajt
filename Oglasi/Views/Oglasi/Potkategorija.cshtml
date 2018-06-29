@@ -1,4 +1,5 @@
-
+@using Oglasi.Services;
+@inject IOglasiServis OglasiServis
 
 <style>
 
@@ -13,8 +14,7 @@
     }
 
     .content {
-        margin: 0;
-        padding: 0;
+        margin-top:20px;
         margin-left: 190px;
         margin-right: 150px;
         position: relative;
@@ -45,7 +45,7 @@
         <div class="meni-naslov">
             <span><b>KATEGORIJE OGLASA</b></span>
         </div>
-        @foreach (var item in @ViewBag.Kategorije as IEnumerable<Kategorije>)
+        @foreach (var item in await OglasiServis.SveKategorije() as IEnumerable<Kategorije>)
 
             {
 
@@ -56,14 +56,14 @@
                 </div>
 
             </div>
-            @if (item.Id == (int)@ViewBag.KategorijaId)
+            @if (item.Id == OglasiServis.IzaberiKategoriju((int)ViewBag.KategorijaId).Id)
                 {
-                @foreach (var p in @ViewBag.Potkategorije as IEnumerable<Potkategorije>)
+                @foreach (var p in await OglasiServis.SvePotkategorijeOdKategorije(item.Id) as IEnumerable<Potkategorije>)
                     {
                     <div class="kategorije">
                         <div class="kategorija-link">
 
-                            @if (p.Id == (int)@ViewBag.PotkategorijaId)
+                            @if (p.Id == OglasiServis.IzaberiPotkategoriju((int)ViewBag.PotkategorijaId).Id)
                             {
                                 <a href="@Url.Action("Potkategorija", new { id = p.Id,  })"  class="visited">
                                     <span>&#9658  @p.NazivPotkategorije</span>

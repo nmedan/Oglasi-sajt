@@ -1,4 +1,6 @@
 ﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
 @model Pretraga
 <!DOCTYPE html>
 <html>
@@ -28,9 +30,13 @@
             margin: 0;
             padding: 0;
         }
-
+        *, html {
+            margin:0;
+            padding:0;
+        }
         .lower-navbar {
             margin-top: 10%;
+            margin-bottom:0;
             background-color: #404040;
             border: 1px solid black;
             vertical-align: middle;
@@ -153,7 +159,7 @@
 
 
 
-        <div class="navbar lower-navbar" style="background-color:#404040;  margin-bottom:0px; padding-top:0px; height:235px; vertical-align:top">
+        <div class="navbar lower-navbar" style="background-color:#404040;  margin-bottom:0px; padding-top:0px; padding-bottom:0px; height:235px; vertical-align:top">
             <div style="background-color:#585858; width:100%; height:20px;">
                 <div class="social-links" style="padding-top:40px; padding-right:50px; float:left; margin-left:200px">
                     <a style="padding-right:20px;" href="https://www.facebook.com/klikoglasi"><i class="fa fa-rss" style="background-color:lightgray; height:20px; width:20px; text-align:center; font-size:20px; vertical-align:middle; color:dimgray; display:inline-block"></i></a>

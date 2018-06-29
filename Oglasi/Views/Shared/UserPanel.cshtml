@@ -1,0 +1,53 @@
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<html>
+<body>
+    <style>
+        .panel-body {
+            
+            font-size:16px;
+            text-align:center;
+            p
+            margin-left:190px;
+        }
+
+        .panel-primary {
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            width: 100%;
+            background-color: blue;
+            vertical-align:middle;
+            
+        }
+
+        .panel-group {
+            width:100%;
+            vertical-align:middle;
+            
+            
+        }
+       
+    </style>
+    <div class="panel-group" >
+        <div class="panel panel-primary" >
+            <div style="display:inline-block; margin-left:190px; line-height:60px; vertical-align:middle; padding-right:25px;">
+                <span style="display:inline-block;">Korisnièki panel</span>
+            </div>
+            <div style="display:inline-block; vertical-align:middle;">
+                <div style="vertical-align:middle;">
+                    <span style="display:inline-block;">
+                        <i class="fa fa-user"></i>
+                        @UserManager.GetUserName(User)
+                    </span>
+                </div>
+                <div style="vertical-align:middle;">
+                    <span style="display:inline-block;">Panel home</span>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+</body>
+</html>

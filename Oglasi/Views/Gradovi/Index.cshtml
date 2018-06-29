@@ -1,5 +1,5 @@
-@model IEnumerable<Gradovi>
-
+@using Oglasi.Services();
+@inject IOglasiServis OglasiServis
 @{
     ViewData["Title"] = "Index";
 }
@@ -16,8 +16,7 @@
         }
 
     .content {
-        margin: 0;
-        padding: 0;
+        margin-top: 20px;
         margin-left: 190px;
         margin-right: 150px;
         position: relative;
@@ -47,7 +46,7 @@
         <div class="meni-naslov">
             <span><b>KATEGORIJE OGLASA</b></span>
         </div>
-        @foreach (var item in ViewBag.Kategorije as IEnumerable<Kategorije>)
+        @foreach (var item in await OglasiServis.SveKategorije() as IEnumerable<Kategorije>)
         {
             <div class="kategorije">
                 <div class="kategorija-link">
@@ -61,7 +60,7 @@
         <div style="font-size:14px; padding-bottom:10px;">
             <b>Oglasi po gradovima</b>
         </div>
-        @foreach (var item in Model)
+        @foreach (var item in await OglasiServis.SviGradovi() as IEnumerable<Gradovi>)
         {
             <div style="font-size:12px">
                 @Html.ActionLink(item.ImeGrada, "Grad", "Oglasi", new {id = item.Id})

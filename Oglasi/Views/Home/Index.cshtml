@@ -1,5 +1,5 @@
-﻿
-
+﻿@using Oglasi.Services;
+@inject IOglasiServis OglasiServis
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -13,6 +13,13 @@
             color: lightblue;
             text-decoration:none;
         }
+
+    .content {
+        margin-top:20px;
+        margin-left: 190px;
+        margin-right: 150px;
+        position: relative;
+    }
 
     .oglasi {
         vertical-align: top;
@@ -50,7 +57,7 @@
         <div class="meni-naslov">
             <span><b>KATEGORIJE OGLASA</b></span>
         </div>
-        @foreach (var item in ViewBag.Kategorije as IEnumerable<Kategorije>)
+        @foreach (var item in await OglasiServis.SveKategorije() as IEnumerable<Kategorije>)
         {
             <div class="kategorije">
                 <div class="kategorija-link">
@@ -62,9 +69,10 @@
     </div>
 
     <div class="oglasi">
-        @for (int i = 0; i < (ViewBag.Kategorije as IEnumerable<Kategorije>).Count()/2; i++)
+      
+        @for (int i = 0; i < (await OglasiServis.SveKategorije() as IEnumerable<Kategorije>).Count() / 2; i++)
         {
-            var model = ViewBag.Kategorije as Kategorije[];
+            var model = await OglasiServis.SveKategorije() as Kategorije[];
             var brOglasa = 0;
             var brPotkategorija = model[i].Potkategorije.Count();
             foreach (var item in model[i].Potkategorije)
@@ -99,9 +107,9 @@
 
     <div class="oglasi">
      
-        @for (int i = (ViewBag.Kategorije as IEnumerable<Kategorije>).Count() / 2; i < (ViewBag.Kategorije as IEnumerable<Kategorije>).Count(); i++)
+        @for (int i = (await OglasiServis.SveKategorije() as IEnumerable<Kategorije>).Count() / 2; i < (await OglasiServis.SveKategorije() as IEnumerable<Kategorije>).Count(); i++)
         {
-            var model = ViewBag.Kategorije as Kategorije[];
+            var model = await OglasiServis.SveKategorije() as Kategorije[];
             var brOglasa = 0;
                  foreach (var item in model[i].Potkategorije)
                  {

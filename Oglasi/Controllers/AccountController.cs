@@ -46,13 +46,18 @@ namespace Oglasi.Controllers
 
         //
         // GET: /Account/Login
+
+        public IActionResult UserHome()
+        {
+            return View();
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)
         {
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.Authentication.SignOutAsync(_externalCookieScheme);
-            ViewBag.Kategorije = await _oglasiServis.SveKategorije(); 
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
@@ -67,13 +72,11 @@ namespace Oglasi.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation(1, "User logged in.");
-                    return RedirectToLocal(returnUrl);
+                     return RedirectToAction("UserHome");
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -87,21 +90,20 @@ namespace Oglasi.Controllers
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
+                    return View();
                 }
             }
-            ViewBag.Kategorije = await _oglasiServis.SveKategorije();
-            return View(model);
+
+            return View();
         }
 
         //
         // GET: /Account/Register
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(string returnUrl = null)
+        public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
-            ViewBag.Kategorije = await _oglasiServis.SveKategorije();
             return View();
         }
 
@@ -127,14 +129,14 @@ namespace Oglasi.Controllers
                     //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("UserHome");
                 }
                 AddErrors(result);
             }
             
             ViewBag.Kategorije = await _oglasiServis.SveKategorije();
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View();
         }
 
         //
@@ -145,7 +147,7 @@ namespace Oglasi.Controllers
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation(4, "User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
+            return RedirectToAction("Index", "Home");
         }
 
         //

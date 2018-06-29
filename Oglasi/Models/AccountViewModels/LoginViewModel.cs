@@ -8,11 +8,11 @@ namespace Oglasi.Models.AccountViewModels
 {
     public class LoginViewModel
     {
-        [Required]
-        [EmailAddress]
-        public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Ovo polje se mora popuniti.")]
+        public string Username { get; set; }
+
+        [Required(ErrorMessage = "Ovo polje se mora popuniti.")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

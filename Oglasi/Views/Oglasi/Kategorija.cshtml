@@ -1,5 +1,5 @@
-
-
+@using Oglasi.Services;
+@inject IOglasiServis OglasiServis
 
 <style>
 
@@ -15,8 +15,7 @@
     }
 
     .content {
-        margin: 0;
-        padding: 0;
+        margin-top:20px;
         margin-left: 190px;
         margin-right: 150px;
         position: relative;
@@ -47,10 +46,10 @@
         <div class="meni-naslov">
             <span><b>KATEGORIJE OGLASA</b></span>
         </div>
-        @foreach (var item in @ViewBag.Kategorije as IEnumerable<Kategorije>)
+        @foreach (var item in await OglasiServis.SveKategorije() as IEnumerable<Kategorije>)
 
         {
-            @if (item.Id == (int)@ViewBag.KategorijaId)
+            @if (item.Id == OglasiServis.IzaberiKategoriju((int)ViewBag.KategorijaId).Id)
             {
 
             <div class="kategorije">
@@ -64,7 +63,7 @@
           
             
               
-                @foreach (var p in @ViewBag.Potkategorije as IEnumerable<Potkategorije>)
+                @foreach (var p in await OglasiServis.SvePotkategorijeOdKategorije(item.Id) as IEnumerable<Potkategorije>)
                 {
                     <div class="kategorije">
                         <div class="kategorija-link">
@@ -95,7 +94,9 @@
             
     </div>
     <div class="oglasi">
-        
+        <div style="font-size:14px;">
+            <b>@ViewBag.KategorijaIme</b>
+        </div>
         @foreach (var item in @ViewBag.Oglasi as IEnumerable<Oglasi>)
         {
             <div class="oglas">

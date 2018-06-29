@@ -9,24 +9,25 @@ namespace Oglasi.Models.AccountViewModels
     public class RegisterViewModel
     {
 
-        [Required]
+        [Required(ErrorMessage = "Ovo polje se mora popuniti.")]
         [Display(Name = "Username")]
         public string Username { get; set; }
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "Ovo polje se mora popuniti.")]
+        [EmailAddress(ErrorMessage = "Ovo polje se mora popuniti.")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [Required(ErrorMessage = "Ovo polje se mora popuniti.")]
+        [StringLength(100, ErrorMessage = "Lozinka mora da sadrži najmanje 6 karaktera", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "Ovo polje se mora popuniti.")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Unesene lozinke se ne poklapaju")]
         public string ConfirmPassword { get; set; }
     }
 }
